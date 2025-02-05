@@ -1,2 +1,2 @@
-# bdrelacionales
-bases de datos relacionales
+# Lopez Aispuro Santiago
+4AVP
