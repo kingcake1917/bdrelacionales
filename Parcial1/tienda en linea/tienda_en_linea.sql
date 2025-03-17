@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 12-03-2025 a las 20:11:16
+-- Tiempo de generación: 17-03-2025 a las 03:24:48
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -34,6 +34,13 @@ CREATE TABLE `carrito` (
   `producto_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
+--
+-- Volcado de datos para la tabla `carrito`
+--
+
+INSERT INTO `carrito` (`id`, `usuario_id`, `cantidad`, `producto_id`) VALUES
+(1, 1, 1, 1);
+
 -- --------------------------------------------------------
 
 --
@@ -46,6 +53,13 @@ CREATE TABLE `categorias` (
   `descripcion` varchar(150) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
+--
+-- Volcado de datos para la tabla `categorias`
+--
+
+INSERT INTO `categorias` (`id`, `nombre`, `descripcion`) VALUES
+(1, 'electronicos', 'computadoras y perifericos');
+
 -- --------------------------------------------------------
 
 --
@@ -55,13 +69,20 @@ CREATE TABLE `categorias` (
 CREATE TABLE `direcciones` (
   `id` int(11) NOT NULL,
   `calle` varchar(100) NOT NULL,
-  `num` int(11) NOT NULL,
+  `num` varchar(50) NOT NULL,
   `colonia` varchar(50) NOT NULL,
   `cp` int(11) NOT NULL,
   `estado` varchar(100) NOT NULL,
   `ciudad` varchar(100) NOT NULL,
   `usuario_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+
+--
+-- Volcado de datos para la tabla `direcciones`
+--
+
+INSERT INTO `direcciones` (`id`, `calle`, `num`, `colonia`, `cp`, `estado`, `ciudad`, `usuario_id`) VALUES
+(1, 'andador apolo', '6677562259', 'conquista', 80080, 'sinaloa', 'culiacan', 1);
 
 -- --------------------------------------------------------
 
@@ -75,6 +96,13 @@ CREATE TABLE `lista_de_deseos` (
   `producto_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
+--
+-- Volcado de datos para la tabla `lista_de_deseos`
+--
+
+INSERT INTO `lista_de_deseos` (`id`, `usuario_id`, `producto_id`) VALUES
+(1, 1, 1);
+
 -- --------------------------------------------------------
 
 --
@@ -87,6 +115,13 @@ CREATE TABLE `membresias` (
   `precio` double NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
+--
+-- Volcado de datos para la tabla `membresias`
+--
+
+INSERT INTO `membresias` (`id`, `nombre`, `precio`) VALUES
+(1, 'prime', 99.99);
+
 -- --------------------------------------------------------
 
 --
@@ -98,6 +133,13 @@ CREATE TABLE `metodo_pago` (
   `nombre` varchar(50) NOT NULL,
   `tipo` varchar(40) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+
+--
+-- Volcado de datos para la tabla `metodo_pago`
+--
+
+INSERT INTO `metodo_pago` (`id`, `nombre`, `tipo`) VALUES
+(1, 'visa', 'tarjeta de debito');
 
 -- --------------------------------------------------------
 
@@ -113,6 +155,13 @@ CREATE TABLE `productos` (
   `categoria_id` int(11) NOT NULL,
   `cantidad` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+
+--
+-- Volcado de datos para la tabla `productos`
+--
+
+INSERT INTO `productos` (`id`, `nombre`, `descripcion`, `precio`, `categoria_id`, `cantidad`) VALUES
+(1, 'lenovo thinkpad', 'computadora economica indestructible', 3599.99, 1, 17);
 
 -- --------------------------------------------------------
 
@@ -130,6 +179,13 @@ CREATE TABLE `usuarios` (
   `genero` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
+--
+-- Volcado de datos para la tabla `usuarios`
+--
+
+INSERT INTO `usuarios` (`id`, `nombre`, `apellido`, `correo`, `telefono`, `fecha_nacimiento`, `genero`) VALUES
+(1, 'horus', 'jonaytontin', 'yanohaytontin@gmail.com', '6677562259', '2008-04-09', 0);
+
 -- --------------------------------------------------------
 
 --
@@ -142,6 +198,13 @@ CREATE TABLE `usuarios_membresia` (
   `membresia_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
+--
+-- Volcado de datos para la tabla `usuarios_membresia`
+--
+
+INSERT INTO `usuarios_membresia` (`id`, `usuario_id`, `membresia_id`) VALUES
+(1, 1, 1);
+
 -- --------------------------------------------------------
 
 --
@@ -153,9 +216,16 @@ CREATE TABLE `ventas` (
   `carrito_id` int(11) NOT NULL,
   `metodo_pago_id` int(11) NOT NULL,
   `total` double NOT NULL,
-  `estado` tinyint(1) NOT NULL,
+  `estado` varchar(150) NOT NULL,
   `direccion_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+
+--
+-- Volcado de datos para la tabla `ventas`
+--
+
+INSERT INTO `ventas` (`id`, `carrito_id`, `metodo_pago_id`, `total`, `estado`, `direccion_id`) VALUES
+(1, 1, 1, 3599.99, 'sinaloa', 1);
 
 --
 -- Índices para tablas volcadas
@@ -240,61 +310,61 @@ ALTER TABLE `ventas`
 -- AUTO_INCREMENT de la tabla `carrito`
 --
 ALTER TABLE `carrito`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT de la tabla `categorias`
 --
 ALTER TABLE `categorias`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT de la tabla `direcciones`
 --
 ALTER TABLE `direcciones`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT de la tabla `lista_de_deseos`
 --
 ALTER TABLE `lista_de_deseos`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT de la tabla `membresias`
 --
 ALTER TABLE `membresias`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT de la tabla `metodo_pago`
 --
 ALTER TABLE `metodo_pago`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT de la tabla `productos`
 --
 ALTER TABLE `productos`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT de la tabla `usuarios`
 --
 ALTER TABLE `usuarios`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT de la tabla `usuarios_membresia`
 --
 ALTER TABLE `usuarios_membresia`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT de la tabla `ventas`
 --
 ALTER TABLE `ventas`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- Restricciones para tablas volcadas
